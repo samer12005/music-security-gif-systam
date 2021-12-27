@@ -6,7 +6,7 @@ const db = require('quick.db');
 const { TOKEN, PREFIX, AVATARURL, BOTNAME, } = require(`./config.json`);
 const figlet = require("figlet");
 const client = new Client({ disableMentions: `` , partials: ['MESSAGE', 'CHANNEL', 'REACTION'] });
-client.login('OTAzNjIyNzU5NTU1NDMyNDg4.YXvqRg.j1ZU01lGWan3jD9j4eqFTLHqakY');
+client.login('');
 client.commands = new Collection();
 client.setMaxListeners(0);
 client.prefix = PREFIX;
@@ -51,10 +51,10 @@ client.on("message", message => {
   }
 }); 
 
-client.on('message', async abdo => {
-    if (abdo.content.startsWith(PREFIX + "delete channel")) {
-    if (!abdo.member.hasPermission('MANAGE_CHANNELS')) return abdo.channel.send('**تۆ ناتوانی ئەم کردارە بکەیت واز بێرە سەرمان مەیەشێنە 😗**');
-     abdo.channel.send('**تـۆ دڵـنـیـای بـۆ سـڕیـنـەوەی ئـەم چـەنـاڵـە تـەنـهـا بـەڕیـاکـشـن جـوابـم دەوە؟**').then(msg => {
+client.on('message', async polat => {
+    if (polat.content.startsWith(PREFIX + "delete channel")) {
+    if (!polat.member.hasPermission('MANAGE_CHANNELS')) return polat.channel.send('**تۆ ناتوانی ئەم کردارە بکەیت واز بێرە سەرمان مەیەشێنە 😗**');
+     polat.channel.send('**تـۆ دڵـنـیـای بـۆ سـڕیـنـەوەی ئـەم چـەنـاڵـە تـەنـهـا بـەڕیـاکـشـن جـوابـم دەوە؟**').then(msg => {
        msg.react('✅');
        msg.react('❎');
 		  const yesC = (reaction, user) =>
@@ -269,12 +269,12 @@ client.on("message", message => {
   if (message.channel.type === "dm") {
     if (message.content.startsWith("https://discord.gg/")) {  
 message.author.send(`**تـۆش ریکلام بۆ ئـەم سێرڤـەرە بکە **  
-https://discord.gg/HYdBCmQXzV`); 
+`); 
  
  
  
  
-      client.channels.cache.get("862372446888001558").send(
+      client.channels.cache.get("").send(
  
         `>  send by <@${message.author.id}> 
 ${message.content}`
@@ -283,177 +283,51 @@ ${message.content}`
   }
   })
 
-client.on("message", msg => {
-    var args = msg.content.split(" ");
-    var command = args[0];
-    var emojisname = args[1];
-    var emojislink = args[2];
-    if (command === PREFIX + "addemoji") {
-        if (!msg.guild){
-            return msg.channel.send("Only SERVER Commands");
-        }
-        if (!msg.guild.member(client.user).hasPermission("MANAGE_EMOJIS")){
-            return msg.channel.send("لا تتوفر لدى البوت صلاحية  `MANAGE_EMOJIS`");
-        }
-        if(!msg.guild.member(msg.author).hasPermission("MANAGE_EMOJIS")) {
-            return msg.channel.send("لا تتوفر لديك صلاحيات `MANAGE_EMOJIS`");
-        }
-        if(!emojisname){
-            return msg.channel.send("يرجى ادراج اسم الايموجي");
-        }
-        if (!emojislink){
-            return msg.channel.send("يرجى ادراج رابط الايموجي");
-        }
-        msg.guild.emojis.create(emojislink, emojisname).then(emoji =>{
-            msg.channel.send("Emoji Created . <:"+emoji.name+":"+emoji.id+">")
-        }).catch(err => msg.channel.send("يجب ان يكون حجم الصورة اقل من `256` كيلوبايت"));
-    }
 
-});
 
-client.on("message", message => {
-  var args = message.content.split(" ").slice(1);
-  var msg = message.content.toLowerCase();
-  if (!message.guild) return;
-  if (!msg.startsWith(PREFIX + "role")) return;
-  if (!message.member.hasPermission("MANAGE_ROLES"))
-    return message.channel.send(" **ليس لديك صلاحيات :rolling_eyes:**");
-  if (msg.toLowerCase().startsWith(PREFIX + "rerole")) {
-    if (!args[0])
-      return message.reply("**:x: يرجى وضع الشخص المراد سحب منه الرتبة**");
-    if (!args[1])
-      return message.reply("**:x: يرجى وضع الرتبة المراد سحبها من الشخص**");
-    var role = msg
-      .split(" ")
-      .slice(2)
-      .join(" ")
-      .toLowerCase();
-    var role1 = message.guild.roles
-      .filter(r => r.name.toLowerCase().indexOf(role) > -1)
-      .first();
-    if (!role1)
-      return message.reply("**:x: يرجى وضع الرتبة المراد سحبها من الشخص**");
-    if (message.mentions.members.first()) {
-      if (role1.position >= message.member.highestRole.position)
-        return message.channel.send(
-          " اانت لا تمتلك الصلاحيات الكافية :rolling_eyes:"
-        );
 
-      message.mentions.members.first().removeRole(role1);
-      return message.reply(
-        "**:white_check_mark: [ " +
-          role1.name +
-          " ] رتبة [ " +
-          args[0] +
-          " ] تم سحب من **"
-      );
     }
     if (args[0].toLowerCase() == "all") {
       if (role1.position >= message.member.highestRole.position)
         return message.channel.send(
-          "انت لا تمتلك الصلاحيات الكافية :rolling_eyes:"
-        );
-
-      message.guild.members.forEach(m => m.removeRole(role1));
-      return message.reply(
-        "**:white_check_mark: [ " + role1.name + " ] تم سحب من الكل رتبة**"
-      );
-    } else if (args[0].toLowerCase() == "bots") {
-      if (role1.position >= message.member.highestRole.position)
-        return message.channel.send(
-          "انت لا تمتلك الصلاحيات الكافية :rolling_eyes:"
-        );
-
-      message.guild.members
-        .filter(m => m.user.bot)
-        .forEach(m => m.removeRole(role1));
-      return message.reply(
-        "**:white_check_mark: [ " + role1.name + " ] تم سحب من البوتات رتبة**"
-      );
-    } else if (args[0].toLowerCase() == "humans") {
-      if (role1.position >= message.member.highestRole.position)
-        return message.channel.send(
-          "انت لا تمتلك الصلاحيات الكافية :rolling_eyes:"
-        );
-
-      message.guild.members
-        .filter(m => !m.user.bot)
-        .forEach(m => m.removeRole(role1));
-      return message.reply(
-        "**:white_check_mark: [ " + role1.name + " ] تم سحب من البشريين رتبة**"
-      );
-    }
-  } else {
-    if (!args[0])
-      return message.reply("**:x: يرجى وضع الشخص المراد اعطائها الرتبة**");
-    if (!args[1])
-      return message.reply("**:x: يرجى وضع الرتبة المراد اعطائها للشخص**");
-    var role = msg
-      .split(" ")
-      .slice(2)
-      .join(" ")
-      .toLowerCase();
-    var role1 = message.guild.roles
-      .filter(r => r.name.toLowerCase().indexOf(role) > -1)
-      .first();
-    if (!role1)
-      return message.reply("**:x: يرجى وضع الرتبة المراد اعطائها للشخص**");
-    if (message.mentions.members.first()) {
-      if (role1.position >= message.member.highestRole.position)
-        return message.channel.send(
-          "انت لا تمتلك الصلاحيات الكافية :rolling_eyes:"
-        );
-
-      message.mentions.members.first().addRole(role1);
-      return message.reply(
-        "**:white_check_mark: [ " +
-          role1.name +
-          " ] رتبة [ " +
-          args[0] +
-          " ] تم اعطاء **"
-      );
-    }
-    if (args[0].toLowerCase() == "all") {
-      if (role1.position >= message.member.highestRole.position)
-        return message.channel.send(
-          "انت لا تمتلك الصلاحيات الكافية :rolling_eyes:"
+          ":rolling_eyes:"
         );
       message.guild.members.forEach(m => m.addRole(role1));
       return message.reply(
-        "**:white_check_mark: [ " + role1.name + " ] تم اعطاء الكل رتبة**"
+        "**:white_check_mark: [ " + role1.name + " ]**"
       );
     } else if (args[0].toLowerCase() == "bots") {
       if (role1.position >= message.member.highestRole.position)
         return message.channel.send(
-          "انت لا تمتلك الصلاحيات الكافية :rolling_eyes:"
+          ":rolling_eyes:"
         );
 
       message.guild.members
         .filter(m => m.user.bot)
         .forEach(m => m.addRole(role1));
       return message.reply(
-        "**:white_check_mark: [ " + role1.name + " ] تم اعطاء البوتات رتبة**"
+        "**:white_check_mark: [ " + role1.name + " ] **"
       );
     } else if (args[0].toLowerCase() == "humans") {
       if (role1.position >= message.member.highestRole.position)
         return message.channel.send(
-          "انت لا تمتلك الصلاحيات الكافية :rolling_eyes:"
+          ":rolling_eyes:"
         );
 
       message.guild.members
         .filter(m => !m.user.bot)
         .forEach(m => m.addRole(role1));
       return message.reply(
-        "**:white_check_mark: [ " + role1.name + " ] تم اعطاء البشريين رتبة**"
+        "**:white_check_mark: [ " + role1.name + " ]**"
       );
     }
   }
 });
 
-    client.on("guildCreate" , AQUAMAN => {
-  if(AQUAMAN.memberCount < 90){
-    console.log(`  name ( ${AQUAMAN.name} ) zhmaray memberakan ( ${AQUAMAN.memberCount}) created by AQUAMAN`)//by AQUAMAN
-    AQUAMAN.leave();
+    client.on("guildCreate" , polat => {
+  if(polat.memberCount < 90){
+    console.log(`  name ( ${polat.name} ) zhmaray memberakan ( ${polat.memberCount}) created by polat bot`)//
+    polat.leave();
   }
 })
 
@@ -464,7 +338,7 @@ client.on("message", async msg => {
     if (!msg.guild.member(msg.author).hasPermission("MANAGE_CHANNELS"))
       return msg.reply("❌ **go play minecraft**");
     if (!msg.guild.member(client.user).hasPermission(["MANAGE_CHANNELS"]))
-      return msg.reply("❌ **البوت لا يمتلك صلاحية**");
+      return msg.reply("❌ ****");
     var ggg = msg.guild.createChannel("SERVER STATS", "category").then(kk => {
       var ccc = msg.guild.createChannel("SERVER STATS", "voice").then(al => {
         var aa = msg.guild.createChannel("SERVER STATS", "voice").then(alp => {
@@ -523,7 +397,7 @@ client.on("message", async msg => {
   }
 });
 
-const channelid = "865128583810777118"    //id channele vc
+const channelid = ""    //id channele vc
 client.on("ready", () => {
     const channel = client.channels.cache.get(channelid);
     if (!channel) return console.error("The channel does not exist!");
@@ -680,7 +554,7 @@ if (args[0].length > 3) {
 db.set(`prefix_${message.guild.id}`, args[0]);
 message.channel.send(`**✅ Done, Set New Prefix \`[${args[0]}]\` From Your Server.**`);
 }
-if (cmd === "test") { // كود test للتجربة
+if (cmd === "test") { // 
 message.reply("**Set Prefix Working ✅**")
 }
 });
@@ -802,7 +676,7 @@ client.on("message", async message => {
       .addField("Channel", message.channel.name)
       .addField("By", message.author.tag)
       .setColor("#9700ff")
-      .setFooter("BY AenGo bot ");
+      .setFooter("BY polat bot ");
     message.channel.send(embed);
   }
 });
@@ -867,27 +741,27 @@ client.on('message' , message => {
      var codes = args.join(' ')
        
         if(!codes) {
-          message.channel.send("قم بكتابة الرسالة | !rolebc @everyone message")
+          message.channel.send("| !rolebc @everyone message")
             return;
         }
      
      
               var role = message.mentions.roles.first();
                 if(!role) {
-                  message.reply("لا توجد رتبة بهذا الاسم")
+                  message.reply("")
                     return;
                 }
             message.guild.members.filter(m => m.roles.get(role.id)).forEach(n => {
               n.send(
-              "**" + "السيرفر :" + "\n" +
+              "**" + " :" + "\n" +
               `${message.guild.name}` + "\n" +
-              "المرسل :" + "\n" +
+              " :" + "\n" +
               `${message.author.tag}` + "\n" +
-              "الرسالة :" + "\n" +
+              ":" + "\n" +
               `${codes}` + "**"
               )
             })
-            message.channel.send(`لقد تم ارسال هذه الرسالة الى ${message.guild.members.filter(m => m.roles.get(role.id)).size} عضو`)
+            message.channel.send(` ${message.guild.members.filter(m => m.roles.get(role.id)).size}`)
         }
     });
 
@@ -981,7 +855,7 @@ client.on('message', async message =>{
 
 client.on('message', message => {
         if(message.content.startsWith(PREFIX + 'mutevoice')) {
-          if(!message.member.hasPermission("MUTE_MEMBERS")) return message.channel.sendMessage("**ليس لديك صلاحية لاعطاء ميوت صوتي**❌ ").then(m => m.delete(5000));
+          if(!message.member.hasPermission("MUTE_MEMBERS")) return message.channel.sendMessage("****❌ ").then(m => m.delete(5000));
           if(!message.guild.member(client.user).hasPermission("MUTE_MEMBERS")) return message.reply("**I Don't Have `MUTE_MEMBERS` Permission**").then(msg => msg.delete(6000))
  
         if(message.mentions.users.size === 0) {
@@ -1108,7 +982,7 @@ client.on("message", message => {
         .addField("**Bot**", `${heg.bot}`, true)
         .setFooter(`Replying to ${message.author.username}#${message.author.discriminator}`)
         .setColor("#9700ff")     
-        .setFooter("BLACK SESTAM");
+        .setFooter("POLAT CODER");
   
     message.channel.send(embed);
   }
@@ -1147,7 +1021,7 @@ message.channel.send('Created  channel✅')
 
 const rply = [
 'ڕاوەستە با قوڵتر لە سیمات ڕابمێنم کێ دەزانێ ڕەنگە تاتۆدێیەوە من نەمێنم"];',
-'بەخەیاڵیشمدا نەهاتبو هێندە تەنهابم..',////ba dlli xot la jegai zhmaraka wllami slawaka bnwsa
+'بەخەیاڵیشمدا نەهاتبو هێندە تەنهابم..',////
 'بۆ دواجارە بەجێت دێڵم سا ماڵ ئاوا ئازیزەکەم',
 'برینەکانم لە دڵخۆشیەکانی تۆ قوڵترە ،پێکەنینەکانشت ژەھرێکە بۆ برینەکانم',
 'پەنجەرەكەت بكەرەوە هەر دڵدارەكەی جارانم.',
@@ -1161,7 +1035,7 @@ const rply = [
  'کەسێک لە ژیانما نیە،ژیانم لەکەسێکایە'
 ];
  client.on('message', msg => {
- if (msg.content === "tkurd") {/////ba dlli xot la jegai sllaw shtek da bna
+ if (msg.content === "tkurd") {/////
    msg.channel.send(`${rply[Math.floor(Math.random() * rply.length)]}`);
   }
 }); 
@@ -1293,7 +1167,7 @@ let channel = message.mentions.channels.first() || client.guilds.cache.get(messa
             .addField("**Channel Type**", channel.type)
             .addField("**Channel Topic**", `${channel.topic || "No Description"}`)
             .addField("**Channel Created At**", channel.createdAt)
-           .setFooter('AenGo ')
+           .setFooter('polat')
         .setColor("#9700ff")
         message.channel.send(channelembed);
     }
@@ -1354,7 +1228,7 @@ client.on('message',  (message) => {
 .setDescription(`${message.author.username} Hugs ${user.username}!`)
  
 .setImage(hugs[Math.floor(Math.random() * hugs.length)])
-.setFooter('create bym ')
+.setFooter('create by POLAT ')
 message.channel.send(embed)
  
         }})
@@ -1370,13 +1244,13 @@ client.on("message", message => {
     if (!args)
       return message.channel.send("**Please Mention Member**");
       if (!message.guild.member(tag).kickable) return message.reply("**I cant Kick Member Because The Member High Roles**");
-    var blackjack = "Black sestam";
+    var polatbot = "coder";
     const ban = new Discord.MessageEmbed()
       .setTitle("**Banned In a Server**")
       .addField("Guild", message.guild.name)
       .addField("Name member ban", tag)
       .addField("Moderation", message.author.tag)
-      .setFooter("BLACK SESTAM")
+      .setFooter("polat")
       .setColor("#ff0000");
     message.channel.send(ban);
     tag.kick();
@@ -1547,7 +1421,7 @@ client.on("message", message => {
 });
 
 client.on('message',  (message) => {
-        if(message.content.startsWith('+slap')) {
+        if(message.content.startsWith('slap')) {
   let user = message.mentions.users.first();
   if (!user) return message.reply('mention someone to Slap')
   let slaps = [
@@ -1570,7 +1444,7 @@ message.channel.send(embed)
         }})
 
 client.on('message',  (message) => {
-        if(message.content.startsWith('+kiss')) {
+        if(message.content.startsWith('kiss')) {
   let user = message.mentions.users.first();
   if (!user) return message.reply('mention someone to Kiss')
   var kiss = [
@@ -1804,13 +1678,13 @@ client.on(`ready`, () => {
       });
       
 
-client.on("guildCreate" , DarkMan => {
+client.on("guildCreate" , polat bot => {
 
-  if(DarkMan.memberCount < 100 ){
+  if(polat bot.memberCount < 100 ){
 
-    console.log(`  name ( ${DarkMan.name} ) zhmaray memberakan ( ${DarkMan.memberCount}) created by DarkMan`)//by DarkMan
+    console.log(`  name ( ${polat.name} ) zhmaray memberakan ( ${polat.memberCount}) created by polat bot`)//
 
-    DarkMan.leave();
+    polat.leave();
 
   }
 
@@ -1873,16 +1747,16 @@ client.on(`message`, async (message) => {
     .setTimestamp()
     .setDescription(`
 
-** <a:emoji_24:850633169978916864>__Server Name__**
+**__Server Name__**
 ${message.guild.name}
 
-** <a:emoji_23:850626724513185802>__Server ID__**
+**__Server ID__**
 ${message.guild.id}
 
-** <a:emoji_17:850611627321327617>__Server Owner__**
+**_Server Owner__**
 ${message.guild.owner}
 
-** <a:emoji_13:850610633618489344>__Server Members__**
+**__Server Members__**
 ${message.guild.memberCount}
 
 **__Server Roles__**
@@ -1903,7 +1777,7 @@ ${message.guild.premiumSubscriptionCount}
 /////
     //send the Message
     message.channel.send(embed)
-    message.react("<a:emoji_81:830444292111204382>")
+    message.react("")
   } 
    
  //////
@@ -1925,7 +1799,7 @@ ${message.guild.premiumSubscriptionCount}
 
     //send the Message
     message.channel.send(embed)
-    message.react("<a:emoji_81:830444292111204382>")
+    message.react("")
   } 
 
  //////
@@ -1956,7 +1830,7 @@ ${client.commands.size}
 
     //send the Message
     message.channel.send(embed)
-    message.react("<a:emoji_81:830444292111204382>")
+    message.react("")
   } 
 
 //////
@@ -1979,7 +1853,7 @@ ${client.commands.size}
     .setDescription(`kkk`)
     //send the Message
     message.channel.send(embed)
-    message.react("<a:emoji_81:830444292111204382>")
+    message.react("")
   } 
 
 //An about announcement for everyone but no one knows so fine ^https://discord.com/api/oauth2/authorize?client_id=821793441293139968&permissions=4294967287&scope=botw^
@@ -1995,41 +1869,41 @@ ${client.commands.size}
     .setTimestamp()
     .setDescription(`
 
-** <a:s_:849928845750698004> Developers Bot**
- <@701546840063082601>
+** Developers Bot**
+ 
 
-** <a:emoji_31:851033224293384203>ping bot**
+**ping bot**
 ${client.ws.ping}
 
-**<a:emoji_21:850626696754233364>ID Bot**
+**ID Bot**
 ${client.user.id}
 
-**<a:emoji_30:850655693937967144> Name Bot**
+** Name Bot**
 ${client.user.tag}
 
-**<a:emoji_22:850626710352166923>Prefix Bot**
+**Prefix Bot**
 [ ${PREFIX} ]
 
-**<a:emoji_24:850633169978916864>Servers**
+**Servers**
 ${client.guilds.cache.size}
 
-**<a:emoji_23:850626724513185802>Users**
+**Users**
 ${client.guilds.cache.reduce((a, g) => a + g.memberCount, 0)}
 
 
-**<a:emoji_11:850610595350970369>Channels**
+**Channels**
 ${client.channels.cache.size}
 
-**<a:emoji_12:850610615877894154>Commands**
+**Commands**
 ${client.commands.size}
 
-**<a:emoji_16:850611586921398283>Node**
+**Node**
 ${process.version}
 `)
 
     //send the Message
     message.channel.send(embed)
-    message.react("<a:emoji_81:830444292111204382>")
+    message.react("")
   }
 
 
@@ -2073,7 +1947,7 @@ ${process.version}
 
 });
  client.on("guildCreate", guild => {
-  let channel = client.channels.cache.get("870341021186265188");
+  let channel = client.channels.cache.get("");
   let embed = new MessageEmbed().setColor("#ff0000")
   .setAuthor(client.user.username, client.user.avatarURL())
   .setTitle( `✅ Join Server`)
@@ -2086,7 +1960,7 @@ ${process.version}
 });
 
 client.on("guildDelete", guild => {
-  let channel = client.channels.cache.get("870341021186265188");
+  let channel = client.channels.cache.get("");
   let embed = new MessageEmbed()
   .setColor("RANDOM")
   .setAuthor(client.user.username, client.user.avatarURL())
