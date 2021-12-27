@@ -10,14 +10,14 @@ module.exports = {
   name: "support",
   aliases: ["supp"],
   cooldown: 8,
-  description: "** Invite pore bot**",
+  description: "** Invite bot**",
   execute(message) {
     let commands = message.client.commands.array();
 
     let helpEmbed = new MessageEmbed()
     .setThumbnail(``)
     .setImage(``)
-    .setTitle(`Kr is One`)
+    .setTitle(`polat bot`)
     .setDescription(`
 ***OWNER BOT<@669072128922091541> ***
 
