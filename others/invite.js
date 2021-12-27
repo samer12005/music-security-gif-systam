@@ -16,6 +16,7 @@ module.exports = {
 
     let helpEmbed = new MessageEmbed()
     .setThumbnail(``)
+    .setImage("") 
     .setTitle(`Invite`)
     .setDescription(`
 [click here]()
