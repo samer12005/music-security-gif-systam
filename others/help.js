@@ -17,6 +17,7 @@ module.exports = {
 
     let helpEmbed = new MessageEmbed()
     .setThumbnail(``)
+    .setImage("")
     .setImage(``)
     .setTitle(`Bot Commands`)
     .setDescription(`
